@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import Img from "../../components/LazyLoadImg/Img";
 import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
-
 function ContactPage() {
   return (
     <>
@@ -134,8 +133,8 @@ function ContactPage() {
                   />
                 </div>{" "}
                 <div className="w-full mt-[15px] h-[20vh] mb-[30px] gap-[36px] md:gap-[10px] items-center md:flex-col md:items-start">
-                  <input
-                    className="border outline-none h-full align-top w-full bg-[#F6F7FA] placeholder:font-normal pl-[20px] pb-[90px] rounded-[7px] text-[17px] font-semibold border-none"
+                  <textarea
+                    className="border resize-none outline-none w-full bg-[#F6F7FA] placeholder:font-normal pt-2 pl-[20px] pb-[90px] rounded-[7px] text-[17px] font-semibold border-none"
                     inputMode="text"
                     placeholder="Message..."
                   />
@@ -159,8 +158,7 @@ function ContactPage() {
           </div>
         </div>
       </section>
-      <div className="spacer h-[50px] slg:h-0"></div>{" "}
-      <ScrollToTop/>
+      <div className="spacer h-[50px] slg:h-0"></div> <ScrollToTop />
     </>
   );
 }

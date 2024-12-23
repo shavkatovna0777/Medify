@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DropDown from "../../components/DropDown/DropDown";
 import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 import PriceFilter from "../../components/PriceFilter/PriceFilter";
@@ -15,6 +15,8 @@ import FormShop from "../../components/Form/FormShop";
 
 function ProductsPage({ cardData, categories }) {
   const [selectedTag, setSelectedTag] = useState("All");
+  const [filteredProducts, setFilteredProducts] = useState(cardData);
+  const [filteredProductsFromForm, setFilteredProductsFromForm] = useState([]);
   const [cartItems, setCartItems] = useState(() => {
     const savedCartItems = localStorage.getItem("cartItems");
     return savedCartItems ? JSON.parse(savedCartItems) : [];
@@ -36,13 +38,40 @@ function ProductsPage({ cardData, categories }) {
     });
   };
 
-  const filteredCards = cardData.filter((card) => {
-    const cardCategory = card.category ? card.category.toLowerCase() : "";
-    const selectedTagLowerCase = selectedTag.toLowerCase();
+  const handleCategorySelect = (categoryName) => {
+    if (categoryName) {
+      setFilteredProducts(
+        cardData.filter((card) => card.category === categoryName)
+      );
+    } else {
+      setFilteredProducts(cardData);
+    }
+  };
 
-    return cardCategory === selectedTagLowerCase || selectedTag === "All";
-  });
+  useEffect(() => {
+    let updatedProducts = cardData;
+    console.log("Before Filter:", updatedProducts);
 
+    if (selectedTag !== "All") {
+      updatedProducts = updatedProducts.filter(
+        (card) => card.category?.toLowerCase() === selectedTag.toLowerCase()
+      );
+    }
+
+    if (searchQuery) {
+      updatedProducts = updatedProducts.filter((card) =>
+        card.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    console.log("After Filter:", updatedProducts);
+
+    setFilteredProducts(updatedProducts);
+  }, [selectedTag, searchQuery, cardData]);
+
+  console.log("card data", cardData);
+
+  // console.log(product)
   return (
     <>
       <div className="cart-page bg-[url(https://wgl-dsites.net/medify/wp-content/uploads/2019/08/page-title-3.jpg)] bg-cover bg-no-repeat bg-scroll bg-center h-[300px] mb-[40px] py-[80px] relative z-[1] p-[10px_0] pb-[88px] bg-[#f2f2f4] w-full">
@@ -70,29 +99,34 @@ function ProductsPage({ cardData, categories }) {
           </div>
         </div>
       </div>
-
       <section>
         <div className="container">
           <div className="sidebar-main mx-[-15px]">
             <div className="products-sidebar-right float-right">
               <div className="top flex justify-between content-center items-center w-full">
                 <p className="inline w-[50%] text-[16px] text-[#79859c] font-medium">
-                  Showing 1–9 of {filteredCards.length} results
+                  Showing 1–9 of {filteredProducts.length} results
                 </p>
                 <DropDown />
               </div>
               <div className="bottom mt-[10px] clear-both">
                 <CardGrid
-                  cardData={cardData}
-                  filteredCards={filteredCards}
+                  cardData={
+                    filteredProductsFromForm.length > 0
+                      ? filteredProductsFromForm
+                      : filteredProducts
+                  }
                   handleAddToCart={handleAddToCart}
                 />
               </div>
             </div>
             <div className="min-h-screen">
               <div className="sticky-sidebar-left float-left w-[27%] flex flex-col justify-center items-center sticky top-0">
-                <FormShop/>
-                <Categories />
+                <FormShop
+                  products={cardData}
+                  filteredResult={setFilteredProductsFromForm}
+                />
+                <Categories onCategorySelect={handleCategorySelect} />
                 <PriceFilter />
                 <BestSellers BestSellersData={BestSellersData} />
                 <Tags

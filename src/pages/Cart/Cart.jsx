@@ -12,16 +12,28 @@ import { formatCurrency } from "/src/utils/formatCurrency.js";
 
 const Cart = ({ delivery = 0 }) => {
   const [cartItems, setCartItems] = useState([]);
+
   useEffect(() => {
+    // Get cart items from localStorage, default to an empty array if not available
     const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
-    setCartItems(savedCart);
+    // Ensure the data is always an array
+    if (Array.isArray(savedCart)) {
+      setCartItems(savedCart);
+    } else {
+      setCartItems([]); // fallback to empty array if invalid data is found
+    }
   }, []);
-  const totalPrice = cartItems.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+
+  // Safely calculate total price only if cartItems is an array
+  const totalPrice = Array.isArray(cartItems)
+    ? cartItems.reduce((total, item) => total + item.price * item.quantity, 0)
+    : 0;
+
+  // Update localStorage whenever cartItems change
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    if (Array.isArray(cartItems)) {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
   }, [cartItems]);
 
   const handleClick = () => {
@@ -41,7 +53,6 @@ const Cart = ({ delivery = 0 }) => {
     setCartItems(updatedCart);
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   };
-
   return (
     <>
       <div className="cart-page bg-[url(https://wgl-dsites.net/medify/wp-content/uploads/2019/08/page-title-3.jpg)] bg-cover bg-no-repeat bg-scroll bg-center h-[300px] mb-[40px] py-[80px] relative z-[1] p-[10px_0] pb-[88px] bg-[#f2f2f4] w-full">
@@ -152,7 +163,7 @@ const Cart = ({ delivery = 0 }) => {
                     <div className="flex items-center w-full justify-between">
                       <div className="parent flex items-center justify-between w-[48%]">
                         <p className="text-blue font-semibold text-[16px]">
-                          ${item.price.toFixed(2)}
+                          ${item.price ? Number(item.price).toFixed(2) : "0.00"}
                         </p>
                         <div className="flex items-center justify-center ">
                           <div
@@ -209,7 +220,7 @@ const Cart = ({ delivery = 0 }) => {
                       <p className="font-semibold">Mahsulotlar</p>
                       <p className="font-medium">${totalPrice}</p>
                     </div>
-              
+
                     <div className="flex justify-between">
                       <p className="font-semibold">To'lov miqdori</p>
                       <p className="font-medium">${totalPrice + delivery}</p>

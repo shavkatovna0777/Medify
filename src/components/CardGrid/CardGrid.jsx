@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { BsCart2 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,7 +9,7 @@ import { TbStar, TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
 
 function CardGrid({ cardData, handleAddToCart }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [cartItems, setCartItems] = useState({});
+  const [cartItems, setCartItems] = useState({}); // Use state to manage cart items
   const navigate = useNavigate();
 
   // Load cart items from localStorage on component mount
@@ -29,31 +30,26 @@ function CardGrid({ cardData, handleAddToCart }) {
       theme: "light",
     });
 
-  const handleClick = (card) => {
-    // Create a new cart items object
-    const updatedCartItems = { ...cartItems };
-
-    if (updatedCartItems[card.id]) {
-      // If item is already in cart, navigate to cart
-      navigate("/cart");
-    } else {
-      // Add item to cart
-      updatedCartItems[card.id] = {
-        ...card,
-        quantity: 1,
-      };
-
-      // Update state and localStorage
-      setCartItems(updatedCartItems);
-      localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-
-      // Call parent's add to cart method
-      handleAddToCart(card);
-
+    const handleClick = (card) => {
+      const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+      
+      const existingProduct = storedCartItems.find(item => item.id === card.id);
+    
+      if (existingProduct) {
+        existingProduct.quantity += 1; // Increase quantity if product is already in the cart
+      } else {
+        storedCartItems.push({ ...card, quantity: 1 }); // Otherwise, add new product
+      }
+    
+      // Update state and localStorage simultaneously
+      setCartItems(storedCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(storedCartItems));
+    
       // Show notification
       notify(card.title);
-    }
-  };
+    };
+    
+    
   const handleClickTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };

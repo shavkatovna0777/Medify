@@ -1,40 +1,51 @@
+import { useState, useEffect } from "react";
 import { IoIosClose } from "react-icons/io";
 import { Link } from "react-router-dom";
 import Img from "../LazyLoadImg/Img";
 import { toast, Bounce } from "react-toastify";
-import { useEffect } from "react";
 
-const ShoppingCart = ({ cartItems, setCartItems, card, id }) => {
-  // Load cart items from localStorage on component mount
+const ShoppingCart = () => {
+  const [cartItems, setCartItems] = useState([]);
+
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
-    console.log("Loaded from localStorage:", savedCart);
-    setCartItems(savedCart);
-  }, [setCartItems]);
-
-  // Save cart items to localStorage whenever they change
+    console.log("Loaded cartItems from localStorage:", savedCart);
+    setCartItems(savedCart); // Initialize state from localStorage
+  }, []); // This effect runs only once on mount
+  
+  
   useEffect(() => {
-    console.log("Saving to localStorage:", cartItems);
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    // Save cart to localStorage every time the cartItems state changes
+    if (cartItems.length > 0) {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
   }, [cartItems]);
+  
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + Number(item.price || 0) * item.quantity,
     0
   );
-  console.log("Cart items in ShoppingCart:", cartItems);
-
+  const addToCart = (cardData) => {
+    const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
+    // Check if product already exists in the cart
+    const existingProduct = savedCart.find(item => item.id === cardData.id);
+  
+    if (existingProduct) {
+      existingProduct.quantity += 1; // Increase quantity if product is already in the cart
+    } else {
+      savedCart.push({ ...cardData, quantity: 1 }); // Otherwise, add new product
+    }
+  
+    localStorage.setItem("cartItems", JSON.stringify(savedCart));
+    setCartItems(savedCart); // Update state to trigger re-render
+  };
   const handleRemoveItem = (id, title) => {
     const updatedCart = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedCart);
     toast.error(`${title} removed from the cart!`, {
       position: "top-right",
       autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
       theme: "light",
       transition: Bounce,
     });
