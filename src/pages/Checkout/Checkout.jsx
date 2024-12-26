@@ -72,16 +72,16 @@ function Checkout() {
       <div className="spacer h-[40px]"></div>
       <section className="">
         <div className="container ">
-          <div className="parent flex  justify-between">
-            <div className="left flex flex-col w-full">
+          <div className="parent flex  justify-between md:flex-wrap">
+            <div className="left flex flex-col w-full slg:w-[50%] md:w-full">
               <div className="top w-full">
-                <h1 className="mb-[30px] text-[36px] text-darkBlue font-bold leading-[54px]">
+                <h1 className="mb-[30px] text-[36px] text-darkBlue font-bold leading-[54px] slg:text-[30px]">
                   Billing details
                 </h1>
               </div>
-              <div className="center flex flex-col gap-4  h-[110vh] mt-[-6px] rounded-[5px] shadow-[11px_8px_35px_0_rgba(49,49,49,0.08)] p-[15px_20px]">
+              <div className="center flex flex-col gap-4  h-[110vh] slg:h-[65vh] md:h-[90vh] mt-[-6px] rounded-[5px] shadow-[11px_8px_35px_0_rgba(49,49,49,0.08)] p-[15px_20px]">
                 <div className="main flex items-center justify-between">
-                  <div className="name-input ">
+                  <div className="name-input  slg:w-40 slg:mr-8">
                     <div className="m-[6px_0_12px]">
                       <span className=" text-[16px] text-darkBlue font-medium">
                         First name *
@@ -89,10 +89,10 @@ function Checkout() {
                     </div>
                     <input
                       type="text"
-                      className="bg-[#f6f7fa] p-[10px_20px] outline-none rounded-[5px]"
+                      className="bg-[#f6f7fa] p-[10px_20px] outline-none rounded-[5px] slg:w-full"
                     />
                   </div>
-                  <div className="lastName-input">
+                  <div className="lastName-input slg:w-40">
                     <div className="m-[6px_0_12px]">
                       <span className=" text-[16px] text-darkBlue font-medium">
                         Last name *
@@ -100,7 +100,7 @@ function Checkout() {
                     </div>
                     <input
                       type="text"
-                      className="bg-[#f6f7fa] p-[10px_20px] outline-none rounded-[5px]"
+                      className="bg-[#f6f7fa] p-[10px_20px] outline-none rounded-[5px] slg:w-full"
                     />
                   </div>
                 </div>
@@ -179,10 +179,10 @@ function Checkout() {
                   />
                 </div>
               </div>
-              <div className="bottom flex flex-col">
+              <div className="bottom flex flex-col slg:pl-5 md:pl-3">
                 <div className="heading flex flex-col">
-                  <div className="top w-full">
-                    <h1 className=" text-[36px] text-darkBlue font-bold leading-[54px]">
+                  <div className="top w-full slg:whitespace-nowrap ">
+                    <h1 className=" text-[36px] text-darkBlue font-bold leading-[54px] slg:text-[25px]">
                       Additional information
                     </h1>
                   </div>
@@ -201,18 +201,16 @@ function Checkout() {
               </div>
             </div>
             <div className="right flex flex-col  w-full">
-              <div className="top ">
-                <h1 className="mb-[24px] text-[36px] text-darkBlue font-bold leading-[54px]">
+              <div className="top slg:pl-10 md:pl-3">
+                <h1 className="mb-[24px] md:mb-[15px] text-[36px] text-darkBlue font-bold leading-[54px] slg:text-[30px]">
                   Your order
                 </h1>
               </div>
-              <div className="center px-10">
+              <div className="center px-10 md:px-3">
                 <div className="flex justify-between bg-lightBlue py-2.5 px-3 text-white rounded-[5px]">
                   <h3 className="text-lg font-medium">Product</h3>
                   <h3 className="text-lg font-medium ">Subtotal</h3>
                 </div>
-
-                {/* Cart Items */}
                 {cartItems.map((item) => (
                   <div
                     key={item.id}
@@ -229,9 +227,7 @@ function Checkout() {
                     </span>
                   </div>
                 ))}
-
-                {/* Subtotal and Total */}
-                <div className="">
+                <div >
                   <div className="flex justify-between px-4 py-3 border-b border-[#EFEFEF]">
                     <span className="font-bold text-darkBlue">Subtotal</span>
                     <span className="font-medium text-blue">
@@ -246,10 +242,9 @@ function Checkout() {
                   </div>
                 </div>
               </div>
-
               <div className="bottom">
                 <div className="main mt-7">
-                  <div className="mx-10 ">
+                  <div className="mx-10 md:mx-3">
                     <div className="flex rounded-[5px] items-center py-4 px-2 space-x-3 mb-[20px] shadow-[11px_8px_35px_0_rgba(49,49,49,0.08)]">
                       <span className="p-1.5 rounded-md bg-lightBlue ">
                         <IoIosInformationCircleOutline className="text-[40px] text-white" />
@@ -271,7 +266,7 @@ function Checkout() {
                     </div>
                   </div>
 
-                  <div className="flex items-center mx-auto justify-center  mb-1">
+                  <div className="flex items-center mx-auto justify-center mb-1 slg:px-10 slg:mb-4 md:px-3">
                     <p className="text-darkBlue">
                       Your personal data will be used to process your order,
                       support <br /> your experience throughout this website,

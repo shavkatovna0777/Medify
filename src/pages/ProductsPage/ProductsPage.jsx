@@ -12,6 +12,7 @@ import useAOS from "../../hooks/useAOS";
 import { BestSellersData } from "../../assets/datas/datas";
 import Categories from "../../components/Categories/Categories";
 import FormShop from "../../components/Form/FormShop";
+import { filterProductsByTag, filterProductsBySearch, filterProductsByCategory } from "../../utils/filterUtils.js";
 
 function ProductsPage({ cardData, categories }) {
   const [selectedTag, setSelectedTag] = useState("All");
@@ -39,39 +40,24 @@ function ProductsPage({ cardData, categories }) {
   };
 
   const handleCategorySelect = (categoryName) => {
-    if (categoryName) {
-      setFilteredProducts(
-        cardData.filter((card) => card.category === categoryName)
-      );
-    } else {
-      setFilteredProducts(cardData);
-    }
+    const filtered = filterProductsByCategory(cardData, categoryName);
+    setFilteredProducts(filtered);
   };
 
   useEffect(() => {
-    let updatedProducts = cardData;
-    console.log("Before Filter:", updatedProducts);
-
-    if (selectedTag !== "All") {
-      updatedProducts = updatedProducts.filter(
-        (card) => card.category?.toLowerCase() === selectedTag.toLowerCase()
-      );
-    }
-
-    if (searchQuery) {
-      updatedProducts = updatedProducts.filter((card) =>
-        card.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-
-    console.log("After Filter:", updatedProducts);
-
-    setFilteredProducts(updatedProducts);
+    let filtered = cardData;
+    
+    // Apply tag filtering
+    filtered = filterProductsByTag(filtered, selectedTag);
+    
+    // Apply search filtering
+    filtered = filterProductsBySearch(filtered, searchQuery);
+    
+    setFilteredProducts(filtered);
   }, [selectedTag, searchQuery, cardData]);
 
-  console.log("card data", cardData);
 
-  // console.log(product)
+  // console.log("card data", cardData);
   return (
     <>
       <div className="cart-page bg-[url(https://wgl-dsites.net/medify/wp-content/uploads/2019/08/page-title-3.jpg)] bg-cover bg-no-repeat bg-scroll bg-center h-[300px] mb-[40px] py-[80px] relative z-[1] p-[10px_0] pb-[88px] bg-[#f2f2f4] w-full">
@@ -120,8 +106,8 @@ function ProductsPage({ cardData, categories }) {
                 />
               </div>
             </div>
-            <div className="min-h-screen">
-              <div className="sticky-sidebar-left float-left w-[27%] flex flex-col justify-center items-center sticky top-0">
+            <div className="min-h-screen ">
+              <div className="sticky-sidebar-left border float-left w-[27%] flex flex-col justify-center items-center sticky top-0">
                 <FormShop
                   products={cardData}
                   filteredResult={setFilteredProductsFromForm}
@@ -132,7 +118,7 @@ function ProductsPage({ cardData, categories }) {
                 <Tags
                   selectedTag={selectedTag}
                   setSelectedTag={setSelectedTag}
-                  cardData={cardData}
+                  setFilteredProducts={setFilteredProducts}
                 />
                 <ShoppingCart
                   cartItems={cartItems}

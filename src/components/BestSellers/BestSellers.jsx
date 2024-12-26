@@ -1,5 +1,6 @@
 import { TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
 import Img from "../LazyLoadImg/Img";
+import { Link } from "react-router-dom";
 
 const StarRating = ({ rating }) => {
   const fullStars = Math.floor(rating);
@@ -22,7 +23,10 @@ const StarRating = ({ rating }) => {
   );
 };
 
-const BestSellers = ({BestSellersData}) => {
+const BestSellers = ({ BestSellersData }) => {
+  const handleClickTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <section className="p-4 max-w-md mx-auto">
       <div className="top flex flex-col items-center justify-center">
@@ -39,15 +43,20 @@ const BestSellers = ({BestSellersData}) => {
             key={item.id}
             className="flex items-start mb-6 space-x-4 pb-2 cursor-pointer"
           >
-            <Img
-              src={item.image}
-              alt={item.name}
-              className="w-20 h-20 object-contain rounded-[10px] shadow-[5px_4px_13px_0_rgba(145,145,145,0.3)]"
-            />
+            <Link onClick={handleClickTop} to={`/product/${item.id}`}>
+              <Img
+                src={item.image}
+                alt={item.name}
+                className="w-20 h-20 object-contain rounded-[10px] shadow-[5px_4px_13px_0_rgba(145,145,145,0.3)]"
+              />
+            </Link>
             <div>
-              <h3 className="text-[16px] font-bold mb-1 text-darkBlue hover:text-lightBlue transition-all duration-300 ease-in-out">
-                {item.name}
-              </h3>
+              <Link onClick={handleClickTop} to={`/product/${item.id}`}>
+                {" "}
+                <h3 className="text-[16px] font-bold mb-1 text-darkBlue hover:text-lightBlue transition-all duration-300 ease-in-out">
+                  {item.name}
+                </h3>
+              </Link>
               <StarRating rating={item.rating} />
               <div className="flex items-center space-x-2">
                 {item.oldPrice && (

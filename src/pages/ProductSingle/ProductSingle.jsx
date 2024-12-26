@@ -6,12 +6,12 @@ import { IoIosArrowForward, IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { TbStarFilled } from "react-icons/tb";
 
 function ProductSingle({ initialCardData, images }) {
-  const { id } = useParams(); 
-  const [cardData, setCardData] = useState(initialCardData); 
+  const { id } = useParams();
+  const [cardData, setCardData] = useState(initialCardData);
   const product = cardData.find((item) => item.id === parseInt(id));
 
   if (!product) {
-    return <div>Product not found</div>; 
+    return <div>Product not found</div>;
   }
 
   const [activeImage, setActiveImage] = useState(0);
@@ -20,8 +20,8 @@ function ProductSingle({ initialCardData, images }) {
     const updatedCart = cardData.map((product) =>
       product.id === id ? { ...product, quantity: newQuantity } : product
     );
-    setCardData(updatedCart); 
-    localStorage.setItem("cartItems", JSON.stringify(updatedCart)); 
+    setCardData(updatedCart);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   };
   const handleClickTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -167,21 +167,31 @@ function ProductSingle({ initialCardData, images }) {
                 <div className="product-meta flex flex-col gap-3 mt-5">
                   <span className="flex items-center gap-1">
                     <b className="text-darkBlue">SKU:</b>
-                    <p className="text-[#3b4964] text-[15px]">
+                    <p className="text-[#3b4964] text-[17px] font-bold">
                       {product.title}
                     </p>
                   </span>
                   <span className="flex items-center gap-1">
                     <b className="text-darkBlue">Category:</b>
-                    <p className="text-[#3b4964] text-[16px] font-medium">
-                      Stethoscope
-                    </p>
+                    {product.categories.map((category, index) => (
+                      <span
+                        key={index}
+                        className="text-[#3b4964] text-[16px] font-medium"
+                      >
+                        {category}
+                      </span>
+                    ))}
                   </span>
                   <span className="flex items-center gap-1">
                     <b className="text-darkBlue">Tags:</b>
-                    <p className="text-[#3b4964] text-[16px] font-medium">
-                      beauty, doctor, healthcare
-                    </p>
+                    {product.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="text-[#3b4964] text-[16px] font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </span>
                 </div>
                 <div className="bottom gap-[24px] mt-[90px] flex">
@@ -224,7 +234,6 @@ function ProductSingle({ initialCardData, images }) {
               </div>
             </div>
           </div>
-        
         </div>
       </div>
     </>

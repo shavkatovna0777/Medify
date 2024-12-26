@@ -39,6 +39,9 @@ const Cart = ({ delivery = 0 }) => {
   const handleClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+  const calculateItemSubtotal = (item) => {
+    return item.quantity * (item.price || 0);
+  };
 
   const handleRemoveItem = (id, title) => {
     const updatedCart = cartItems.filter((item) => item.id !== id);
@@ -109,24 +112,26 @@ const Cart = ({ delivery = 0 }) => {
             </div>
           ) : (
             <>
-              <div className=" bg-lightBlue rounded-md py-[15px]">
+              <div className=" bg-lightBlue rounded-md py-[15px] md:hidden">
                 <div className="parent flex items-center justify-between">
-                  <div className="left  w-full pl-5">
+                  <div className="left w-full pl-5">
                     <h2 className="font-medium text-[18px] text-white">
                       Product
                     </h2>
                   </div>
-                  <div className="right flex items-center justify-between w-full ">
+                  <div className="right flex items-center justify-around  w-full ">
                     <h3>
                       <span className="font-medium text-[18px] text-white">
                         Price
                       </span>
                     </h3>
+                    <span></span>
                     <h3>
                       <span className="font-medium text-[18px] text-white">
                         Quantity
                       </span>
                     </h3>
+                    <span></span>
                     <h3>
                       <span className="font-medium text-[18px] text-white">
                         Subtotal
@@ -142,65 +147,21 @@ const Cart = ({ delivery = 0 }) => {
                 {cartItems.map((item) => (
                   <li
                     key={item.id}
-                    className=" border-b-[1px] border-[#E5E5E5] w-full flex items-center pl-5 py-5"
+                    className=" border-b-[1px]  rounded-lg border-[#E5E5E5] w-full flex items-center pl-5 py-5 md:flex-wrap md:border"
                   >
-                    <div className="flex items-center  w-[95%] gap-10">
-                      <Link to={"/productSingle"}>
-                        <Img
-                          src={item.img}
-                          alt="product image"
-                          className={
-                            "w-20 h-20 object-contain rounded-[8px] shadow-[5px_4px_13px_0_rgba(145,145,145,0.3)]"
-                          }
-                        />
-                      </Link>
-                      <Link to={"/productSingle"}>
-                        <h3 className="text-[18px] text-darkBlue font-bold transition-all duration-200 ease-in-out hover:text-blue">
-                          {item.title}
-                        </h3>
-                      </Link>
-                    </div>
-                    <div className="flex items-center w-full justify-between">
-                      <div className="parent flex items-center justify-between w-[48%]">
-                        <p className="text-blue font-semibold text-[16px]">
-                          ${item.price ? Number(item.price).toFixed(2) : "0.00"}
-                        </p>
-                        <div className="flex items-center justify-center ">
-                          <div
-                            className="btn border border-[#E5E5E5] px-2.5 rounded-full text-xl"
-                            onClick={() =>
-                              updateItemQuantity(
-                                item.id,
-                                Math.max(1, item.quantity - 1)
-                              )
+                    <div className="flex items-center w-[95%] gap-10 md:flex-col">
+                      <div className="main flex items-center  gap-20">
+                        <Link  to={`/product/${item.id}`} className="md:w-32">
+                          <Img
+                            src={item.img}
+                            alt="product image"
+                            className={
+                              "w-20 h-20 object-contain rounded-[8px] shadow-[5px_4px_13px_0_rgba(145,145,145,0.3)] "
                             }
-                          >
-                            <button className="text-[20px] font-semibold text-blue hover:text-darkBlue transition-all duration-300 ease-in-out">
-                              -
-                            </button>
-                          </div>
-                          <p className="w-8 items-center justify-center mx-auto flex text-darkBlue font-bold">
-                            {item.quantity}
-                          </p>
-                          <div
-                            className="btn border border-[#E5E5E5] px-2 rounded-full text-xl"
-                            onClick={() =>
-                              updateItemQuantity(item.id, item.quantity + 1)
-                            }
-                          >
-                            <button className="text-[20px] font-semibold text-blue hover:text-darkBlue transition-all duration-300 ease-in-out">
-                              +
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="parent2 flex items-center w-[33%] justify-between">
-                        <p className="text-blue font-semibold text-[16px]">
-                          {item.quantity} × $
-                          {item.price ? Number(item.price).toFixed(2) : "0.00"}
-                        </p>
+                          />
+                        </Link>
                         <button
-                          className=" p-5 text-xl text-[#A5A5A5] hover:text-red-700 transition-all duration-150 ease-in-out"
+                          className="p-5 text-2xl text-[#A5A5A5] hidden hover:text-red-700 transition-all duration-150 ease-in-out md:block"
                           onClick={() => {
                             handleRemoveItem(item.id, item.title);
                           }}
@@ -208,22 +169,116 @@ const Cart = ({ delivery = 0 }) => {
                           <IoIosClose />
                         </button>
                       </div>
+                      <div className="flex items-center gap-11">
+                        <h2 className="font-bold text-[18px] text-darkBlue hidden md:block">
+                          Product:
+                        </h2>
+                        <Link  to={`/product/${item.id}`}>
+                          <h3 className="text-[18px] text-darkBlue font-bold transition-all duration-200 ease-in-out hover:text-blue ">
+                            {item.title}
+                          </h3>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="flex items-center  w-full justify-around md:flex-col">
+                      <div className="parent flex items-center justify-between w-[48%] md:flex-col">
+                        <div className="flex items-center text-start  justify-start  self-end md:gap-[130px]">
+                          <h2 className="font-bold text-[18px] text-darkBlue hidden md:block ">
+                            Price:
+                          </h2>
+                          <p className="text-blue font-semibold text-[16px]">
+                            $
+                            {item.price
+                              ? Number(item.price).toFixed(2)
+                              : "0.00"}
+                          </p>
+                        </div>
+                        <div className="flex items-center text-start  justify-start self-end md:gap-[59px]">
+                          <h2 className="font-bold text-[18px] text-darkBlue hidden md:block ">
+                            Quantity:
+                          </h2>
+                          <div className="flex items-center justify-center ">
+                            <div
+                              className="btn border border-[#E5E5E5] px-2.5 rounded-full text-xl"
+                              onClick={() =>
+                                updateItemQuantity(
+                                  item.id,
+                                  Math.max(1, item.quantity - 1)
+                                )
+                              }
+                            >
+                              <button className="text-[20px] font-semibold text-blue hover:text-darkBlue transition-all duration-300 ease-in-out">
+                                -
+                              </button>
+                            </div>
+                            <p className="w-8 items-center justify-center mx-auto flex text-darkBlue font-bold">
+                              {item.quantity}
+                            </p>
+                            <div
+                              className="btn border border-[#E5E5E5] px-2 rounded-full text-xl"
+                              onClick={() =>
+                                updateItemQuantity(item.id, item.quantity + 1)
+                              }
+                            >
+                              <button className="text-[20px] font-semibold text-blue hover:text-darkBlue transition-all duration-300 ease-in-out">
+                                +
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center  self-center  md:pl-6  md:w-full md:gap-24 md:justify-around">
+                        <h2 className="font-bold text-[18px] text-darkBlue hidden md:block ">
+                          Subtotal:
+                        </h2>
+                        <div className="parent2 flex items-center w-[100%]  justify-between ">
+                          <p className="text-blue font-semibold whitespace-nowrap text-[16px] slg:text-[14px] slg:whitespace-nowrap">
+                            {item.quantity} × $
+                            {calculateItemSubtotal(item).toFixed(2)}
+                          </p>
+                          <button
+                            className="p-5 text-xl text-[#A5A5A5] hover:text-red-700 transition-all duration-150 ease-in-out md:hidden"
+                            onClick={() => {
+                              handleRemoveItem(item.id, item.title);
+                            }}
+                          >
+                            <IoIosClose />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </li>
                 ))}
               </ul>
-              <div className="sticky top-[80px] pt-[67px] md:pt-0 flex flex-col min-w-[300px]">
-                <div className="shadow-xl p-4 bg-white rounded-[16px] flex flex-col gap-2">
-                  <h6 className="font-semibold text-[20px]">Jami:</h6>
-                  <div className="flex flex-col gap-2">
-                    <div className="flex justify-between">
-                      <p className="font-semibold">Mahsulotlar</p>
-                      <p className="font-medium">${totalPrice}</p>
-                    </div>
-
-                    <div className="flex justify-between">
-                      <p className="font-semibold">To'lov miqdori</p>
-                      <p className="font-medium">${totalPrice + delivery}</p>
+              <div className="parent flex mt-10">
+                <div className="w-full md:hidden"></div>
+                <div className="sticky top-[80px] md:pt-0 flex flex-col min-w-[350px] md:justify-center md:items-center md:min-w-0 md:w-full">
+                  <div className="shadow-xl p-4 bg-white rounded-[16px] py-10 px-10 flex flex-col gap-2 md:w-full">
+                    <h6 className="font-semibold text-[24px] text-darkBlue">
+                      Cart Totals
+                    </h6>
+                    <hr className="text-[#e5e5e5]" />
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-5">
+                        <p className="font-bold text-darkBlue">Subtotal</p>
+                        <p className="font-medium text-blue">${totalPrice}</p>
+                      </div>
+                      <div></div>
+                      <div></div>
+                      <div className="flex gap-5">
+                        <p className="font-bold text-darkBlue">Total</p>
+                        <p className="font-medium text-blue">
+                          ${totalPrice + delivery}
+                        </p>
+                      </div>{" "}
+                      <br />
+                      <Link
+                        onClick={handleClick}
+                        to={"/checkout"}
+                        className="bg-blue border text-center font-semibold border-blue transition-all duration-300 ease-in-out text-white py-3 px-4 rounded-md flex-grow hover:text-blue hover:bg-white"
+                      >
+                        Proceed To Checkout
+                      </Link>
                     </div>
                   </div>
                 </div>

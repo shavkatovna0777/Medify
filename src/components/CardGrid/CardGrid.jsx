@@ -20,7 +20,7 @@ function CardGrid({ cardData, handleAddToCart }) {
 
   const notify = (title) =>
     toast.success(`${title} added to the cart!`, {
-      position: "top-right",
+      position: "bottom-left",
       autoClose: 5000,
       hideProgressBar: false,
       closeOnClick: true,

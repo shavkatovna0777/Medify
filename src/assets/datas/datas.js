@@ -1,7 +1,7 @@
 export const cardData = [
   {
     categories: ["Apparel", "Nursing", "Stethoscope"],
-    tags: ["clinic", "ealthcare", "healthcare", "hospital"],
+    tags: ["Clinic", "ealthcare", "healthcare", "hospital"],
     id: 1,
     quantity: 1,
     title: "Ceil Blue Littmann",

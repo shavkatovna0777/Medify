@@ -1,16 +1,20 @@
 import React from "react";
 import { cardData } from "../../assets/datas/datas";
 
-function Tags({ selectedTag = "All", setSelectedTag }) {
+function Tags({ selectedTag = "All", setSelectedTag, setFilteredProducts }) {
   const handleTagClick = (tag) => {
     setSelectedTag(tag);
-  };
-  const filteredCards = cardData.filter((card) => {
-    const cardCategory = card.category ? card.category.toLowerCase() : ""; // Add check for undefined category
-    const selectedTagLowerCase = selectedTag.toLowerCase(); // Always call .toLowerCase() on defined strings
+    const filtered = tag === "All" 
+      ? cardData 
+      : cardData.filter(product => 
+          product.tags.some(productTag => 
+            productTag.toLowerCase() === tag.toLowerCase()
+          )
+        );
     
-    return cardCategory === selectedTagLowerCase || selectedTag === "All";
-  });
+    setFilteredProducts(filtered);
+  };
+
   return (
     <section>
       <div className="top flex flex-col items-center justify-center">
@@ -20,8 +24,8 @@ function Tags({ selectedTag = "All", setSelectedTag }) {
         <div className="text-orange h-4 font-bold mb-[25px] cursor-default">
           __
         </div>
-        <div className="parent-btn flex items-start flex-wrap border mx-auto justify-center">
-          <div className="top-btn flex flex-wrap gap-[5px] pb-2 w-[48%]">
+        <div className="parent-btn flex items-start flex-wrap mx-auto justify-center">
+          <div className="top-btn grid grid-cols-3 gap-2 pb-2 w-full">
             {[
               "All",
               "Beauty",
@@ -35,10 +39,10 @@ function Tags({ selectedTag = "All", setSelectedTag }) {
               <button
                 key={tag}
                 onClick={() => handleTagClick(tag)}
-                className={`py-1 px-4 rounded-[5px] transition-all duration-300 ease-in-out ${
+                className={`py-1 px-2 rounded-[5px] transition-all duration-300 ease-in-out ${
                   selectedTag === tag
                     ? "bg-lightBlue text-white"
-                    : "bg-[#F7F7F7] text-[#3b4964] hover:bg-lightBlue hover:text-white"
+                    : "bg-[#F7F7F7] text-[#3b4964] text-[15px] hover:bg-lightBlue hover:text-white"
                 }`}
               >
                 {tag}
