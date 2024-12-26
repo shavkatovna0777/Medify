@@ -19,7 +19,7 @@ function FormShop({ products, filteredResult }) {
   return (
     <form
       onSubmit={handleSearch}
-      className="flex w-full justify-center max-w-[235px] mb-5 items-center pl-4 bg-[#f6f6f6] rounded-md overflow-hidden relative"
+      className="flex w-full justify-center max-w-[235px] mb-5 items-center pl-4 bg-[#f6f6f6] rounded-md overflow-hidden relative slg:max-w-full"
     >
       <input
         type="text"

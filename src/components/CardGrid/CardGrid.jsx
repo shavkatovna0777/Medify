@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { BsCart2 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,10 +8,9 @@ import { TbStar, TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
 
 function CardGrid({ cardData, handleAddToCart }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [cartItems, setCartItems] = useState({}); // Use state to manage cart items
+  const [cartItems, setCartItems] = useState({}); 
   const navigate = useNavigate();
 
-  // Load cart items from localStorage on component mount
   useEffect(() => {
     const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || {};
     setCartItems(storedCartItems);
@@ -30,26 +28,22 @@ function CardGrid({ cardData, handleAddToCart }) {
       theme: "light",
     });
 
-    const handleClick = (card) => {
-      const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-      
-      const existingProduct = storedCartItems.find(item => item.id === card.id);
-    
-      if (existingProduct) {
-        existingProduct.quantity += 1; // Increase quantity if product is already in the cart
-      } else {
-        storedCartItems.push({ ...card, quantity: 1 }); // Otherwise, add new product
-      }
-    
-      // Update state and localStorage simultaneously
-      setCartItems(storedCartItems);
-      localStorage.setItem("cartItems", JSON.stringify(storedCartItems));
-    
-      // Show notification
-      notify(card.title);
-    };
-    
-    
+  const handleClick = (card) => {
+    const storedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    const existingProduct = storedCartItems.find((item) => item.id === card.id);
+
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+    } else {
+      storedCartItems.push({ ...card, quantity: 1 });
+    }
+
+    setCartItems(storedCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(storedCartItems));
+    notify(card.title);
+  };
+
   const handleClickTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -69,11 +63,11 @@ function CardGrid({ cardData, handleAddToCart }) {
         theme="light"
       />
 
-      <div className="grid grid-cols-3 gap-7 my-[50px]">
+      <div className="grid grid-cols-3 gap-7 my-[50px] md:grid-cols-1 md:max-w-full md:justify-center md:items-center md:content-center md:w-full md:justify-self-center md:justify-items-center">
         {cardData.map((card, index) => (
           <div
             key={card.id}
-            className="relative p-1 bg-white rounded-lg shadow-lg transition-transform duration-400 cursor-pointer"
+            className="relative p-1 bg-white rounded-lg shadow-lg transition-transform duration-400 cursor-pointer md:max-w-full md:w-full md:justify-center md:content-center md:justify-self-center md:justify-items-center"
             onMouseEnter={() => setHoveredIndex(index)}
             onMouseLeave={() => setHoveredIndex(null)}
           >

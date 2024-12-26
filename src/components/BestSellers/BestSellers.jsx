@@ -28,7 +28,7 @@ const BestSellers = ({ BestSellersData }) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
   return (
-    <section className="p-4 max-w-md mx-auto">
+    <section className="p-4 max-w-md mx-auto slg:max-w-full slg:w-full">
       <div className="top flex flex-col items-center justify-center">
         <div className="title text-[16px] leading-[1.6] relative z-[1] inline-block font-bold uppercase text-darkBlue">
           <h3>BestSellers</h3>

@@ -10,17 +10,14 @@ const ShoppingCart = () => {
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
     console.log("Loaded cartItems from localStorage:", savedCart);
-    setCartItems(savedCart); // Initialize state from localStorage
-  }, []); // This effect runs only once on mount
-  
-  
+    setCartItems(savedCart);
+  }, []);
+
   useEffect(() => {
-    // Save cart to localStorage every time the cartItems state changes
     if (cartItems.length > 0) {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }
   }, [cartItems]);
-  
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + Number(item.price || 0) * item.quantity,
@@ -28,17 +25,16 @@ const ShoppingCart = () => {
   );
   const addToCart = (cardData) => {
     const savedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
-    // Check if product already exists in the cart
-    const existingProduct = savedCart.find(item => item.id === cardData.id);
-  
+    const existingProduct = savedCart.find((item) => item.id === cardData.id);
+
     if (existingProduct) {
-      existingProduct.quantity += 1; // Increase quantity if product is already in the cart
+      existingProduct.quantity += 1;
     } else {
-      savedCart.push({ ...cardData, quantity: 1 }); // Otherwise, add new product
+      savedCart.push({ ...cardData, quantity: 1 });
     }
-  
+
     localStorage.setItem("cartItems", JSON.stringify(savedCart));
-    setCartItems(savedCart); // Update state to trigger re-render
+    setCartItems(savedCart);
   };
   const handleRemoveItem = (id, title) => {
     const updatedCart = cartItems.filter((item) => item.id !== id);
@@ -57,7 +53,7 @@ const ShoppingCart = () => {
 
   return (
     <>
-      <div className="flex flex-col mb-10 items-center justify-start h-auto p-4 w-80 bg-gray-100 rounded-lg">
+      <div className="flex flex-col mb-10 items-center justify-start h-auto p-4 w-80 bg-gray-100 rounded-lg slg:w-full">
         <div className="top flex flex-col items-center justify-center mb-4">
           <h3 className="text-[16px] font-bold uppercase text-darkBlue">
             Shopping Cart
@@ -67,22 +63,22 @@ const ShoppingCart = () => {
           </div>
         </div>
         {cartItems.length > 0 ? (
-          <div className="w-full">
+          <div className="w-full ">
             {cartItems.map((item) => (
               <div
                 key={item.id}
-                className="flex gap-[15px] items-start mb-4 p-2 bg-white rounded justify-center"
+                className="flex gap-[15px] items-start mb-4 p-2  bg-white rounded justify-center slg:w-full "
               >
-                <Link onClick={handleClick}  to={`/product/${item.id}`}>
+                <Link onClick={handleClick} to={`/product/${item.id}`}>
                   <Img
                     src={item.img}
                     alt={item.title}
                     className="w-20 h-20 object-contain rounded-[8px] shadow-[5px_4px_13px_0_rgba(145,145,145,0.3)]"
                   />
                 </Link>
-                <div className="flex flex-col">
-                  <div className="flex items-center gap-2">
-                    <Link onClick={handleClick}  to={`/product/${item.id}`}>
+                <div className="flex flex-col  slg:w-full ">
+                  <div className="flex items-center gap-2 slg:justify-between">
+                    <Link onClick={handleClick} to={`/product/${item.id}`}>
                       <h4 className="font-medium text-darkBlue whitespace-nowrap text-[15px] transition-all duration-300 ease-in-out hover:text-lightBlue">
                         {item.title}
                       </h4>

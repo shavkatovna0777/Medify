@@ -1,7 +1,7 @@
 export const cardData = [
   {
     categories: ["Apparel", "Nursing", "Stethoscope"],
-    tags: ["Clinic", "ealthcare", "healthcare", "hospital"],
+    tags: ["Clinic", "Healthcare", "Hospital"],
     id: 1,
     quantity: 1,
     title: "Ceil Blue Littmann",
@@ -14,7 +14,7 @@ export const cardData = [
   },
   {
     categories: ["Stethoscope", "Nursing"],
-    tags: ["beauty", "doctor", "healthcare"],
+    tags: ["Beauty", "Doctor", "Healthcare"],
     id: 2,
     quantity: 1,
     title: "Orange Littmann Class",
@@ -27,7 +27,7 @@ export const cardData = [
   },
   {
     categories: ["Stethoscope", "Tools"],
-    tags: ["hospital", "medicine", "patient"],
+    tags: ["Hospital", "Medicine", "Patient"],
     id: 3,
     quantity: 1,
     title: "Navy Blue Littmann",
@@ -40,7 +40,7 @@ export const cardData = [
   },
   {
     categories: ["Nursing", "Stethoscope"],
-    tags: ["clinic", "hospital", "innovation", "medicine"],
+    tags: ["Clinic", "Hospital", "Innovation", "Medicine"],
     id: 4,
     quantity: 1,
     title: "Plum Littmann Master",
@@ -54,7 +54,7 @@ export const cardData = [
 
   {
     categories: ["Stethoscope"],
-    tags: ["clinic", "health", "medicine"],
+    tags: ["Clinic", "Health", "Medicine"],
     id: 5,
     quantity: 1,
     title: "Lilac Littmann Light",
@@ -65,7 +65,7 @@ export const cardData = [
   },
   {
     categories: ["Stethoscope", "Tools"],
-    tags: ["beauty", "doctor", "patient"],
+    tags: ["Beauty", "Doctor", "Patient"],
     id: 6,
     quantity: 1,
     title: "Caribbean Littmann",
@@ -77,7 +77,7 @@ export const cardData = [
 
   {
     categories: ["Stethoscope"],
-    tags: ["clinic", "ealthcare", "health"],
+    tags: ["Clinic", "Health"],
     id: 7,
     quantity: 1,
     title: "Royal Blue Littmann",
@@ -90,7 +90,7 @@ export const cardData = [
   },
   {
     categories: ["Stethoscope", "Apparel"],
-    tags: ["beauty", "clinic", "innovation"],
+    tags: ["Beauty", "Clinic", "Innovation"],
     id: 8,
     quantity: 1,
     title: "Burgundy Littmann",
@@ -103,7 +103,7 @@ export const cardData = [
   },
   {
     categories: ["Stethoscope"],
-    tags: ["beauty", "doctor", "ealthcare", "health", "medicine", "patient"],
+    tags: ["Beauty", "Doctor", "Health", "Medicine", "Patient"],
     id: 9,
     quantity: 1,
     title: "Master Blue Littmann",

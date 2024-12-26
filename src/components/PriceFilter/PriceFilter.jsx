@@ -5,7 +5,7 @@ const PriceFilter = () => {
   const [values, setValues] = useState([40, 250]);
 
   return (
-    <div className="w-full max-w-sm mx-auto p-4">
+    <div className="w-full max-w-sm mx-auto p-4  slg:max-w-full slg:p-0">
       <div className="top flex flex-col items-center justify-center">
         <div className="title text-[16px] leading-[1.6] relative z-[1] inline-block font-bold uppercase text-darkBlue">
           <h3>Price</h3>
@@ -27,7 +27,7 @@ const PriceFilter = () => {
             <div
               {...restProps}
               key={key}
-              className="w-[85%] mx-auto h-1 bg-lightBlue rounded relative"
+              className="w-[85%] slg:w-full slg:mx-2  mx-auto h-1 bg-lightBlue rounded relative"
             >
               {children}
             </div>

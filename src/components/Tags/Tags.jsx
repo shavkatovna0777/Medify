@@ -16,8 +16,8 @@ function Tags({ selectedTag = "All", setSelectedTag, setFilteredProducts }) {
   };
 
   return (
-    <section>
-      <div className="top flex flex-col items-center justify-center">
+    <section className=" slg:w-full slg:max-w-full">
+      <div className="top flex flex-col  items-center justify-center">
         <div className="title text-[16px] leading-[1.6] relative z-[1] inline-block font-bold uppercase text-darkBlue">
           <h3>Tags</h3>
         </div>
@@ -25,7 +25,7 @@ function Tags({ selectedTag = "All", setSelectedTag, setFilteredProducts }) {
           __
         </div>
         <div className="parent-btn flex items-start flex-wrap mx-auto justify-center">
-          <div className="top-btn grid grid-cols-3 gap-2 pb-2 w-full">
+          <div className="top-btn grid grid-cols-3  text-[14px] gap-2 pb-2 w-full slg:grid-cols-8 md:grid-cols-3 md:gap-3">
             {[
               "All",
               "Beauty",
@@ -42,7 +42,7 @@ function Tags({ selectedTag = "All", setSelectedTag, setFilteredProducts }) {
                 className={`py-1 px-2 rounded-[5px] transition-all duration-300 ease-in-out ${
                   selectedTag === tag
                     ? "bg-lightBlue text-white"
-                    : "bg-[#F7F7F7] text-[#3b4964] text-[15px] hover:bg-lightBlue hover:text-white"
+                    : "bg-[#F7F7F7] text-[#3b4964] hover:bg-lightBlue hover:text-white"
                 }`}
               >
                 {tag}
