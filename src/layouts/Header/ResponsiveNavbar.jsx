@@ -6,6 +6,7 @@ import {
   FileText,
   ShoppingBag,
   Contact,
+  ClipboardPlus,
 } from "lucide-react";
 import Img from "../../components/LazyLoadImg/Img";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -16,7 +17,7 @@ const ResponsiveNavbar = ({ isOpen, setIsOpen }) => {
 
   const menuItems = [
     { title: "Home", icon: <Home size={20} />, path: "/" },
-    { title: "Pages", icon: <FileText size={20} />, path: "/page" },
+    { title: "Doctors", icon: <ClipboardPlus  size={20} />, path: "/page" },
     { title: "Shop", icon: <ShoppingBag size={20} />, path: "/products" },
     { title: "Contacts", icon: <Contact size={20} />, path: "/contact" },
   ];
