@@ -8,31 +8,24 @@ import { Link } from "react-router-dom";
 import ScrollToTop from "../../components/ScrollToTop/ScrollToTop";
 
 function Checkout() {
-  // Declare the cart state
+ 
   const [cartItems, setCartItems] = useState([]);
   const [subtotal, setSubtotal] = useState(0);
 
-  // Load cart from localStorage on initial load
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cartItems")) || [];
     setCartItems(storedCart);
   }, []);
-
-  // Recalculate subtotal whenever cartItems change
   useEffect(() => {
     const newSubtotal = cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
       0
     );
     setSubtotal(newSubtotal);
-
-    // Save the cart to localStorage whenever it changes
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
-
-  // Handle item removal
   const removeItem = (id) => {
-    const updatedCart = cartItems.filter(item => item.id !== id);
+    const updatedCart = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedCart);
   };
 
@@ -79,7 +72,7 @@ function Checkout() {
                   Billing details
                 </h1>
               </div>
-              <div className="center flex flex-col gap-4  h-[110vh] slg:h-[65vh] md:h-[90vh] mt-[-6px] rounded-[5px] shadow-[11px_8px_35px_0_rgba(49,49,49,0.08)] p-[15px_20px]">
+              <div className="center flex flex-col gap-4  h-[110vh] slg:h-[65vh] md:h-[100vh] mt-[-6px] rounded-[5px] shadow-[11px_8px_35px_0_rgba(49,49,49,0.08)] p-[15px_20px]">
                 <div className="main flex items-center justify-between">
                   <div className="name-input  slg:w-40 slg:mr-8">
                     <div className="m-[6px_0_12px]">
@@ -227,7 +220,7 @@ function Checkout() {
                     </span>
                   </div>
                 ))}
-                <div >
+                <div>
                   <div className="flex justify-between px-4 py-3 border-b border-[#EFEFEF]">
                     <span className="font-bold text-darkBlue">Subtotal</span>
                     <span className="font-medium text-blue">
