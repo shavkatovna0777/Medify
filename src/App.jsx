@@ -69,8 +69,7 @@ function App() {
     console.log("Loaded cartItems from localStorage: ", cartItems);
   }, [cartItems]);
   useEffect(() => {
-    // Simulate an initial loading delay
-    const timer = setTimeout(() => setIsLoading(false), 1000); // Adjust delay as needed
+    const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 

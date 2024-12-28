@@ -33,7 +33,7 @@ function ContactPage() {
           </div>
         </div>
       </div>
-      <section className="w-full h-auto py-[40px]">
+      <section className="w-full h-auto py-[40px]  md:py-0">
         <div className="container">
           <div className="parent ">
             <div className="top flex slg:flex-wrap">
@@ -99,8 +99,8 @@ function ContactPage() {
               </div>
               <FormContactPage />
             </div>
-            <div className="spacer h-[90px] slg:h-[90px]"></div>
-            <div className="bottom  rounded-[15px] overflow-hidden w-full h-[500px] slg:h-[300px] md:h-full">
+            <div className="spacer h-[90px] slg:h-[90px] md:h-0"></div>
+            <div className="bottom  rounded-[15px] overflow-hidden w-full h-[500px] slg:h-[300px] md:h-full ">
               <Img
                 className="object-cover w-full h-full"
                 src="https://wgl-dsites.net/medify/wp-content/uploads/2019/08/section-bg-13.jpg"
@@ -110,7 +110,7 @@ function ContactPage() {
           </div>
         </div>
       </section>
-      <div className="spacer h-[50px] slg:h-0"></div> <ScrollToTop />
+      <div className="spacer h-[50px] slg:h-0 "></div> <ScrollToTop />
     </>
   );
 }

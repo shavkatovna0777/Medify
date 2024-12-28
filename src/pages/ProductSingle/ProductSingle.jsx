@@ -198,7 +198,7 @@ function ProductSingle({ initialCardData, images }) {
                 <div className="bottom gap-[24px] mt-[90px] flex md:mt-4">
                   <div className="flex items-center justify-center ">
                     <div
-                      className="btn [#E5E5E5] px-3.5 py-0.5 rounded-full text-xl"
+                      className="btn border-[#E5E5E5] px-3.5 py-0.5 rounded-full text-xl border"
                       onClick={() =>
                         updateItemQuantity(
                           product.id,
@@ -214,7 +214,7 @@ function ProductSingle({ initialCardData, images }) {
                       {product.quantity}
                     </p>
                     <div
-                      className="btn [#E5E5E5] px-2.5 py-0.5 rounded-full text-xl"
+                      className="btn border-[#E5E5E5] px-2.5 py-0.5 rounded-full text-xl border"
                       onClick={() =>
                         updateItemQuantity(product.id, product.quantity + 1)
                       }
