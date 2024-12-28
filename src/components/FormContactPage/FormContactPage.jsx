@@ -104,6 +104,7 @@ Qo'ng'iroq so'rayotgan bemorning:
                   : strippedValue
               );
             }}
+            value={phoneNumber}
             className="border outline-none w-full placeholder:font-normal bg-[#F6F7FA] p-[10px_20px] rounded-[7px] text-[17px] font-semibold border-none"
             inputMode="text"
             placeholder="+998 (__) ___-__-__"

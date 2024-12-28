@@ -124,7 +124,7 @@ export const doctorData = [
     name: "Pitter Moris",
     role: "Endocginologist Surgeon",
     workingSince: 1987,
-    email:"pitter.moris"
+    email: "pitter.moris",
   },
   {
     id: 2,
@@ -133,8 +133,7 @@ export const doctorData = [
     name: "Kristen Stude",
     role: "Internist, Oncologist",
     workingSince: 2010,
-    email:"kristen.stude"
-
+    email: "kristen.stude",
   },
   {
     id: 3,
@@ -143,8 +142,7 @@ export const doctorData = [
     name: "Nicolas Sparks",
     role: "Internist, Dantist",
     workingSince: 2008,
-    email:"nicolas.sparks"
-
+    email: "nicolas.sparks",
   },
   {
     id: 4,
@@ -153,8 +151,7 @@ export const doctorData = [
     name: "Morgan Firmen",
     role: "General Endocrinologist",
     workingSince: 1990,
-    email:"morgan.firman"
-
+    email: "morgan.firman",
   },
 
   {
@@ -164,8 +161,7 @@ export const doctorData = [
     name: "Samanta Crane",
     role: "Internist, General Practitioner",
     workingSince: 1988,
-    email:"samanta.crane"
-
+    email: "samanta.crane",
   },
   {
     id: 6,
@@ -174,8 +170,7 @@ export const doctorData = [
     name: "Ostin Green",
     role: "Internist, Emergency Physician",
     workingSince: 2002,
-    email:"ostin.green"
-
+    email: "ostin.green",
   },
   {
     id: 7,
@@ -184,8 +179,7 @@ export const doctorData = [
     name: "Norman Colins",
     role: "Surgeon, Cardiologist",
     workingSince: 2008,
-    email:"norman.colins"
-
+    email: "norman.colins",
   },
   {
     id: 8,
@@ -194,8 +188,7 @@ export const doctorData = [
     name: "Harry Poterson",
     role: "Internist, Orthopedic Surgeon",
     workingSince: 2012,
-    email:"harry.poterson"
-
+    email: "harry.poterson",
   },
 ];
 
@@ -360,6 +353,11 @@ export const SwiperBigCardDatas = [
   },
 ];
 
+export const features = [
+  "Comfortable Snap-Tight soft seal eartips reduce ambient noise.",
+  "Tubes and a rugged headset reliably withstand a million bends.",
+  "Key diagnostic aid in the process of physical patient assessments.",
+];
 export const BestSellersData = [
   {
     id: 1,
@@ -400,17 +398,28 @@ export const categories = [
 
 export const images = [
   {
-    img1: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_1-240x240.jpg",
+    img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_1-240x240.jpg",
   },
   {
-    img2: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_2-240x240.jpg",
+    img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_2-240x240.jpg",
   },
   {
-    img3: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_3-240x240.jpg",
+    img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_3-240x240.jpg",
   },
   {
-    img4: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_4-240x240.jpg",
+    img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_4-240x240.jpg",
+  },
+  {
+    img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_1-240x240.jpg",
+  },
+  {
+    img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_2-240x240.jpg",
+  },
+  {
+    img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_3-240x240.jpg",
+  },
+  {
+    img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_4-240x240.jpg",
   },
 ];
 
-// const item = cardData[0];

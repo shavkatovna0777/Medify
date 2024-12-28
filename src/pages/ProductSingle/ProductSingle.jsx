@@ -3,7 +3,9 @@ import { Link, useParams } from "react-router-dom";
 import InnerImageZoom from "react-inner-image-zoom";
 import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 import { IoIosArrowForward, IoMdCheckmarkCircleOutline } from "react-icons/io";
-import { TbStarFilled } from "react-icons/tb";
+import RelatedProducts from "../../components/RelatedProducts/RelatedProducts";
+import { Star } from "lucide-react";
+import { features } from "../../assets/datas/datas";
 
 function ProductSingle({ initialCardData, images }) {
   const { id } = useParams();
@@ -15,7 +17,27 @@ function ProductSingle({ initialCardData, images }) {
   }
 
   const [activeImage, setActiveImage] = useState(0);
+  const getRandomRating = () => {
+    return Math.floor(Math.random() * 2) + 3;
+  };
 
+  const renderStarRating = (rating) => {
+    return (
+      <div className="flex gap-1">
+        {[...Array(5)].map((_, index) => (
+          <Star
+            key={index}
+            size={16}
+            className={`${
+              index < rating
+                ? "text-orange fill-orange"
+                : "text-[#CFC8D8] fill-[#CFC8D8]"
+            }`}
+          />
+        ))}
+      </div>
+    );
+  };
   const updateItemQuantity = (id, newQuantity) => {
     const updatedCart = cardData.map((product) =>
       product.id === id ? { ...product, quantity: newQuantity } : product
@@ -32,8 +54,8 @@ function ProductSingle({ initialCardData, images }) {
     <>
       <div className="cart-page flex bg-[url(https://wgl-dsites.net/medify/wp-content/uploads/2019/08/page-title-3.jpg)] bg-cover bg-no-repeat bg-scroll bg-center h-[300px] mb-[40px] py-[80px] relative z-[1] p-[10px_0] pb-[88px] bg-[#f2f2f4] w-full">
         <div className="wrapper flex">
-          <div className="max-w-[1170px] w-[100%] mx-auto px-[100px]">
-            <div className="content flex flex-col justify-end items-center h-[100%] px-10 w-[100%]">
+          <div className="max-w-[1170px] w-[100%] mx-auto px-[100px] md:px-2">
+            <div className="content flex flex-col justify-end items-center h-[100%] px-10 w-[100%] md:px-0">
               <div className="breadcrumps whitespace-nowrap capitalize font-bold flex items-center mt-[8px] leading-[24px] text-[16px]">
                 <Link
                   to={"/products"}
@@ -63,32 +85,31 @@ function ProductSingle({ initialCardData, images }) {
       </div>
       <div className="product-single">
         <div className="container">
-          <div className="main flex justify-between">
-            {" "}
-            <div className="left">
-              <div className="card w-[540px] rounded-[15px] shadow-[11px_9px_35px_0_rgba(54,54,54,0.08)] overflow-hidden">
-                <div className="product-image">
+          <div className="main flex justify-between md:flex-wrap">
+            <div className="left w-[540px]">
+              <div className="card rounded-[15px]  shadow-[11px_9px_35px_0_rgba(54,54,54,0.08)] overflow-hidden slg:w-[400px] md:w-full">
+                <div className="product-image ">
                   <InnerImageZoom
                     src={product.img}
                     zoomSrc={product.img}
                     alt={product.title}
                     zoomScale={1.5}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover "
                     zoomType="hover"
                   />
                 </div>
               </div>
               {
-                <div className="mt-5 flex gap-4">
+                <div className="mt-5 flex gap-4 overflow-auto scrollbar-none">
                   {images.map((image, index) => (
                     <button
                       key={index}
                       onClick={() => setActiveImage(index)}
-                      className={`relative w-24 h-24 rounded-lg overflow-hidden border-2 transition-all
+                      className={`relative  w-[calc((100%-64px)/5)] md:w-[calc((100%-48px)/4)] flex-shrink-0 md:aspect-square md:h-auto border rounded-lg overflow-hidden 2 transition-all
                ${activeImage === index ? "border-blue" : "border-transparent"}`}
                     >
                       <img
-                        src={Object.values(image)[0]} // Access the first value in the object
+                        src={image.img}
                         alt={`Product thumbnail ${index + 1}`}
                         className={`w-full h-full object-cover transition-opacity
                ${
@@ -102,30 +123,20 @@ function ProductSingle({ initialCardData, images }) {
                 </div>
               }
             </div>
-            <div className="right w-[48%]">
-              <div className="product-details">
-                <h1 className="product-title text-[42px] text-darkBlue font-semibold">
+            <div className="right w-[48%] md:w-full">
+              <div className="product-details md:mt-5">
+                <h1 className="product-title text-[42px] text-darkBlue font-semibold md:whitespace-nowrap md:text-[30px]">
                   {product.title}
                 </h1>
                 <div className="flex items-center gap-3">
-                  <Link
-                    onClick={handleClickTop}
-                    to={`/product/${product.id}`}
-                    className="start-icon flex text-[#FF9E21] gap-[3px] text-[16px] my-[10px]"
-                  >
-                    <TbStarFilled />
-                    <TbStarFilled />
-                    <TbStarFilled />
-                    <TbStarFilled />
-                    <TbStarFilled className="text-[#CFC8D8]" />
-                  </Link>
-                  <span className="text-[13px] text-[#3B4973]">
+                  {renderStarRating(getRandomRating())}
+                  <span className="text-[13px] text-[#3B4973] md:whitespace-nowrap">
                     (1 customer review)
                   </span>
                 </div>
                 <div className="price-main flex items-center gap-2 mt-2">
                   <p className="line-through text-[16px] text-[#a5a5a5]">
-                    $ 98.90
+                    $ 108.90
                   </p>
                   <p className="product-price text-[24px] text-blue font-bold">
                     {product.price
@@ -133,41 +144,31 @@ function ProductSingle({ initialCardData, images }) {
                       : "Price not available"}
                   </p>
                 </div>
-                <div className="short-description text-[#3B4964] mt-4">
-                  <p className="product-description text-[16px] text-[#3B4973] m-[0_0_15px]">
+                <div className="short-description text-[#3B4964] mt-4 md:w-full max-w-full ">
+                  <p className="product-description text-[16px] text-[#3B4973] m-[0_0_15px] md:w-full md:m-0 ">
                     {product.description || "No description available"}
                   </p>
-                  <ul>
-                    <li className="flex items-center text-[16px] gap-[16px] py-[6px]">
-                      <span className="text-[21px] text-lightBlue">
-                        <IoMdCheckmarkCircleOutline />
-                      </span>
-                      Comfortable Snap-Tight soft seal eartips reduce ambient
-                      noise.{" "}
-                    </li>
-                    <li className="flex items-center text-[16px] gap-[16px] py-[6px]">
-                      <span className="text-[21px] text-lightBlue">
-                        <IoMdCheckmarkCircleOutline />
-                      </span>
-                      Tubes and a rugged headset reliably withstand a million
-                      bends.{" "}
-                    </li>
-                    <li className="flex items-center text-[16px] gap-[16px] py-[6px]">
-                      <span className="text-[21px] text-lightBlue">
-                        <IoMdCheckmarkCircleOutline />
-                      </span>
-                      Key diagnostic aid in the process of physical patient
-                      assessments.{" "}
-                    </li>
+                  <ul className="md:w-full">
+                    {features.map((feature, index) => (
+                      <li
+                        key={index}
+                        className="flex items-center text-[16px] gap-[16px] py-[6px]"
+                      >
+                        <span className="text-[21px] text-lightBlue">
+                          <IoMdCheckmarkCircleOutline />
+                        </span>
+                        {feature}
+                      </li>
+                    ))}
                   </ul>
                 </div>
-                <div className="font-semibold mt-2 text-[#e4e4e4]">
+                <div className="font-semibold mt-2 text-[#e4e4e4] md:hidden">
                   _________
                 </div>
-                <div className="product-meta flex flex-col gap-3 mt-5">
+                <div className="product-meta flex flex-col gap-3 mt-5 ">
                   <span className="flex items-center gap-1">
                     <b className="text-darkBlue">SKU:</b>
-                    <p className="text-[#3b4964] text-[17px] font-bold">
+                    <p className="text-[#3b4964] text-[17px] font-bold md:whitespace-nowrap">
                       {product.title}
                     </p>
                   </span>
@@ -194,31 +195,31 @@ function ProductSingle({ initialCardData, images }) {
                     ))}
                   </span>
                 </div>
-                <div className="bottom gap-[24px] mt-[90px] flex">
+                <div className="bottom gap-[24px] mt-[90px] flex md:mt-4">
                   <div className="flex items-center justify-center ">
                     <div
-                      className="btn border border-[#E5E5E5] px-2.5 rounded-full text-xl"
+                      className="btn [#E5E5E5] px-3.5 py-0.5 rounded-full text-xl"
                       onClick={() =>
                         updateItemQuantity(
                           product.id,
-                          Math.max(1, product.quantity - 1) // Prevent negative quantities
+                          Math.max(1, product.quantity - 1)
                         )
                       }
                     >
-                      <button className="text-[20px] font-medium text-blue hover:text-darkBlue transition-all duration-300 ease-in-out">
+                      <button className="text-[28px] font-medium text-blue hover:text-darkBlue transition-all duration-300 ease-in-out">
                         -
                       </button>
                     </div>
-                    <p className="w-8 items-center justify-center mx-auto flex text-darkBlue font-bold">
+                    <p className="w-10 items-center justify-center mx-auto flex text-darkBlue font-bold text-[20px]">
                       {product.quantity}
                     </p>
                     <div
-                      className="btn border border-[#E5E5E5] px-2 rounded-full text-xl"
+                      className="btn [#E5E5E5] px-2.5 py-0.5 rounded-full text-xl"
                       onClick={() =>
                         updateItemQuantity(product.id, product.quantity + 1)
                       }
                     >
-                      <button className="text-[20px] font-medium text-blue hover:text-darkBlue transition-all duration-300 ease-in-out">
+                      <button className="text-[28px] font-medium text-blue hover:text-darkBlue transition-all duration-300 ease-in-out">
                         +
                       </button>
                     </div>
@@ -226,7 +227,7 @@ function ProductSingle({ initialCardData, images }) {
                   <Link
                     onClick={handleClickTop}
                     to={"/cart"}
-                    className="bg-lightBlue text-center font-semibold border transition-all duration-300 ease-in-out border-lightBlue text-white py-3 px-8 rounded-md  hover:text-lightBlue hover:bg-white"
+                    className="bg-lightBlue text-center font-semibold transition-all duration-300 ease-in-out lightBlue text-white py-4 px-12 rounded-md  hover:text-lightBlue hover:bg-white md:whitespace-nowrap"
                   >
                     Add To Cart
                   </Link>
@@ -234,6 +235,7 @@ function ProductSingle({ initialCardData, images }) {
               </div>
             </div>
           </div>
+          <RelatedProducts currentProductId={product.id} products={cardData} />
         </div>
       </div>
     </>

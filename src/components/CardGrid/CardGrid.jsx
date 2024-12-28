@@ -4,11 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import Img from "../LazyLoadImg/Img";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { TbStar, TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
+import { Star } from "lucide-react";
 
 function CardGrid({ cardData, handleAddToCart }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [cartItems, setCartItems] = useState({}); 
+  const [cartItems, setCartItems] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,6 +46,28 @@ function CardGrid({ cardData, handleAddToCart }) {
 
   const handleClickTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const getRandomRating = () => {
+    return Math.floor(Math.random() * 2) + 3;
+  };
+
+  const renderStarRating = (rating) => {
+    return (
+      <div className="flex gap-1">
+        {[...Array(5)].map((_, index) => (
+          <Star
+            key={index}
+            size={14}
+            className={`${
+              index < rating
+                ? "text-orange fill-orange"
+                : "text-[#CFC8D8] fill-[#CFC8D8]"
+            }`}
+          />
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -87,17 +109,7 @@ function CardGrid({ cardData, handleAddToCart }) {
               >
                 {card.title}
               </Link>
-              <Link
-                onClick={handleClickTop}
-                to={`/product/${card.id}`}
-                className="start-icon flex text-[#FF9E21] gap-[3px] text-[13px] my-[10px]"
-              >
-                <TbStarFilled />
-                <TbStarFilled />
-                <TbStarFilled />
-                <TbStarHalfFilled />
-                <TbStar />
-              </Link>
+              <div className="stars my-2"> {renderStarRating(getRandomRating())}</div>
 
               <p className="text-blue font-bold">${card.price}</p>
             </div>

@@ -60,3 +60,4 @@ const DoctorsCard = ({ doctor = {} }) => {
 };
 
 export default DoctorsCard;
+

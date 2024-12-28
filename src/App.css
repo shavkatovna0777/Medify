@@ -153,13 +153,21 @@ li {
   -webkit-user-drag: none;
 }
 
-.info-item{
+.info-item {
   font-family: "Nunito";
   margin-bottom: 5px;
   font-size: 16px;
   display: flex;
   align-items: center;
 }
-.info-item h5{
+.info-item h5 {
   font-family: "Ubuntu";
+}
+.scrollbar-none {
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* For Firefox */
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
 }
