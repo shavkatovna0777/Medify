@@ -105,7 +105,7 @@ function CardGrid({ cardData, handleAddToCart }) {
               <Link
                 onClick={handleClickTop}
                 to={`/product/${card.id}`}
-                className="text-[20px] font-bold hover:text-lightBlue cursor-pointer transition-all duration-300 ease-in-out"
+                className="text-[20px] md:text-[15px] md:whitespace-nowrap font-bold hover:text-lightBlue cursor-pointer transition-all duration-300 ease-in-out"
               >
                 {card.title}
               </Link>
