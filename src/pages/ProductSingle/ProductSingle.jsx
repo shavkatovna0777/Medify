@@ -227,7 +227,7 @@ function ProductSingle({ initialCardData, images }) {
                   <Link
                     onClick={handleClickTop}
                     to={"/cart"}
-                    className="bg-lightBlue text-center font-semibold transition-all duration-300 ease-in-out lightBlue text-white py-4 px-12 rounded-md  hover:text-lightBlue hover:bg-white md:whitespace-nowrap"
+                    className="bg-lightBlue hover:bg-blue text-center font-semibold transition-all duration-300 ease-in-out lightBlue text-white py-4 px-12 rounded-md  hover:text-white md:whitespace-nowrap"
                   >
                     Add To Cart
                   </Link>

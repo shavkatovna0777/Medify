@@ -3,8 +3,8 @@ import ProgressBar from '../../ui/ProgressBar'
 
 function SkillandEducation() {
   return (
-    <div className="skill-education-main flex ">
-    <div className="left  w-full p-[20px]">
+    <div className="skill-education-main flex md:flex-col">
+    <div className="left w-full p-[20px]">
       <h1 className="text-[30px] text-darkBlue font-semibold mb-[10px]">
         Professional Skills
       </h1>

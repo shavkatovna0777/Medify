@@ -358,6 +358,7 @@ export const features = [
   "Tubes and a rugged headset reliably withstand a million bends.",
   "Key diagnostic aid in the process of physical patient assessments.",
 ];
+
 export const BestSellersData = [
   {
     id: 1,
