@@ -84,7 +84,7 @@ function ProductsPage({ cardData, categories }) {
       <section>
         <div className="container">
           <div className="sidebar-main mx-[-15px]">
-            <div className="products-sidebar-right float-right slg:px-10 md:px-12">
+            <div className="products-sidebar-right float-right slg:px-10 md:px-0">
               <div className="top flex justify-between content-center items-center w-full  md:flex-col gap-2">
                 <p className="inline w-[50%] text-[16px] text-[#79859c] font-medium md:whitespace-nowrap ">
                   Showing 1–9 of {filteredProducts.length} results
