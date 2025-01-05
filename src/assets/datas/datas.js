@@ -17,7 +17,7 @@ export const cardData = [
     tags: ["Beauty", "Doctor", "Healthcare"],
     id: 2,
     quantity: 1,
-    title: "Orange Littmann Class",
+    title: "Orange Littmann",
     price: "86.25",
     img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_02_1-768x768.jpg",
     hoverImg:
@@ -43,7 +43,7 @@ export const cardData = [
     tags: ["Clinic", "Hospital", "Innovation", "Medicine"],
     id: 4,
     quantity: 1,
-    title: "Plum Littmann Master",
+    title: "Plum Littmann",
     price: "85.50",
     img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_04_1-768x768.jpg",
     hoverImg:
@@ -106,7 +106,7 @@ export const cardData = [
     tags: ["Beauty", "Doctor", "Health", "Medicine", "Patient"],
     id: 9,
     quantity: 1,
-    title: "Master Blue Littmann",
+    title: "Master Blue",
     price: "195.00",
     img: "https://wgl-dsites.net/medify/wp-content/uploads/2019/08/shop_09_1-768x768.jpg",
     hoverImg:
