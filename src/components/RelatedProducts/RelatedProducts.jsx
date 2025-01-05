@@ -66,7 +66,7 @@ const RelatedProducts = ({ currentProductId, products }) => {
         Related Products
       </h2>
       
-      <div className="grid grid-cols-4 md:grid-cols-2 lg:grid-cols-2 gap-8" data-aos="fade-left" data-aos-once="true">
+      <div className="grid grid-cols-4 md:grid-cols-1 lg:grid-cols-2 gap-8" data-aos="fade-left" data-aos-once="true">
         {getRelatedProducts().map((product) => (
           <div 
             key={product.id}
