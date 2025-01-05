@@ -85,7 +85,7 @@ function CardGrid({ cardData, handleAddToCart }) {
         theme="light"
       />
 
-      <div className="grid grid-cols-3 gap-7 my-[50px] md:grid-cols-2 md:items-center md:content-center md:w-full ">
+      <div className="grid grid-cols-3 gap-7 my-[50px] md:grid-cols-1 md:items-center md:content-center md:w-full ">
         {cardData.map((card, index) => (
           <div
             key={card.id}
